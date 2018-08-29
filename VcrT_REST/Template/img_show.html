@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <center>
+            <div class="img_out">
+                <img src="{{ img_url }}" id="img">
+            </div>
+        </center>
+        <button class="btn" onclick="rest()">
+            rest
+        </button>
+        <script>
+            var f = true
+            var n = true
+            var original_w = 0
+            var original_h = 0
+            const w = window.screen.width
+            var image = document.getElementById('img')
+
+            rest = function () {
+                if (n == true) {
+                    original_w = image.naturalWidth
+                    original_h = image.naturalHeight
+                    n = false
+                }
+                if (f == true) {
+                    image.style.width = w + 'px'
+                    const h = get_ratio_h(w, original_w/original_h)
+                    image.style.height = h + 'px'
+                    image.style.position = 'absolute'
+                    image.style.left = 0
+                    f = false
+                }
+                else {
+                    image.style.width = original_w + 'px'
+                    const h = get_ratio_h(original_w, original_w/original_h)
+                    image.style.height = h + 'px'
+                    image.style.position = 'relative'
+                    image.style.left = null
+                    f = true
+                }
+            }
+            get_ratio_h = function (w, ratio) {
+                h = w / ratio
+            }
+        </script>
+        <style>
+        .btn {
+            background: none;
+            border: 1px solid #ffffff;
+            color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        #img {
+        }
+        </style>
+    </body>
+</html>
